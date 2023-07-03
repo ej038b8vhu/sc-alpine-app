@@ -1,4 +1,4 @@
-# Alpine Syntax
+# [Alpine Syntax](https://sc-alpine-app.netlify.app)
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/8f8e55d7-f99f-4a36-b9ca-737ce5876cf2/deploy-status)](https://app.netlify.com/sites/sc-alpine-app/deploys)
 
