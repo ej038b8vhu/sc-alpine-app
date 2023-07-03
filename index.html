@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible"
+        content="IE=edge">
+  <script defer
+          src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+  <link rel="icon"
+        href="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Favatars1.githubusercontent.com%2Fu%2F59030169%3Fs%3D400%26v%3D4&f=1&nofb=1&ipt=93d1e14763861d8f560107e5f09d9ba891a6b53f2a0e56d79f71b98a0313575c&ipo=images"
+        type="image/png" />
+  <title>ALPINE</title>
+</head>
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    max-width: 100%;
+    height: cal(100vh - 3em);
+    color: #292929;
+    display: flex;
+    margin: 3em;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .bg-color {
+    background-color: #fff;
+  }
+
+  .scroll-bg-color {
+    background-color: lightblue;
+  }
+
+  button:hover {
+    cursor: pointer
+  }
+
+  .line-trough {
+    text-decoration: line-through;
+  }
+</style>
+
+<body>
+  <header style="position: relative; margin-bottom: 2.5em;">
+    <img src="https://alpinejs.dev/alpine_long.svg"
+         alt="">
+    <!-- 0. Transition -->
+    <div x-data="{isOpen: false}"
+         style="position: absolute; right: -4em; bottom: .5em;">
+      <button @click="isOpen = !isOpen"
+              style="border:none; background-color:rgb(30,38,50);padding:10px;color:#eee; border-radius: 4px;">
+        <p style="background-color: lightblue; width:20px; height: 20px; border-radius: 50%; margin: 0; padding: 0;">
+        </p>
+      </button>
+      <!-- The transition directives work both with x-show AND x-if. -->
+      <div x-show="isOpen"
+           style="background: lightblue; padding: 0 1em; width: 100px; position:absolute; right: -6.5em; top: -5em; border-radius: 12px 12px 12px 0;"
+           x-transition.duration.400ms.opacity.scale.4.origin.bottom.left>
+        <h1>Hi</h1>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <div
+       style="display: flex; justify-content: space-around; align-items: baseline; width: 75%; min-width: 1400px; height: 100%;">
+    <!-- 1. State -->
+    <section style="display: flex; flex-direction: column; align-items: center;">
+      <h4 style="margin: 3.5em 0 .3em .1em;">State</h4>
+      <div x-data="{isOpen: false}">
+        <!-- event: x-on:event or @event & .actions -->
+        <button x-on:click="isOpen = !isOpen"
+                @keydown.escape="isOpen = false"
+                style="border: none; background-color: rgb(30, 38, 50); padding: 10px; color: #eee;">Click me</button>
+        <!-- event action -->
+        <ul x-show="isOpen"
+            @click.away="isOpen = false"
+            style="background-color: lightblue; padding: .3em 2em; width: 200px">
+          <li>About</li>
+          <li>This</li>
+          <li>World</li>
+        </ul>
+      </div>
+
+      <!-- 2. Ref -->
+      <h4 style="margin: 3.5em 0 .3em .1em;">Ref</h4>
+      <div x-data="">
+        <button @click="$refs.input.focus()"
+                style="border: none; background-color: rgb(30, 38, 50); padding: 10px; color: #eee;"> Trigger Focus
+        </button>
+        <input type="text"
+               x-ref="input"
+               style="padding: 8px;">
+      </div>
+
+      <!-- 3. Dynamic Style -->
+      <h4 style="margin: 3.5em 0 .3em .1em;">Style</h4>
+      <div x-data="{ tab: 'tab1' }"
+           style="width: 360px; height: 200px; background-color: lightblue;">
+        <li style="list-style: none; display: flex; justify-content: space-around; ">
+          <!-- click with preventDefault -->
+          <!-- :class to conditional add style -->
+          <a href="#"
+             @click.prevent="tab='tab1'"
+             style="color: black; text-decoration: none;  padding:15px; display: inline-block;"
+             :class="{'bg-color' : tab === 'tab1'}">Tab1</a>
+          <a @click.prevent="tab='tab2'"
+             href="#"
+             style="color: black; text-decoration: none; padding: 15px; display: inline-block;"
+             :class="{'bg-color' : tab === 'tab2'}">Tab2</a>
+          <a @click.prevent="tab='tab3'"
+             href="#"
+             style="color: black; text-decoration: none; padding: 15px; display: inline-block;"
+             :class="{'bg-color' : tab === 'tab3'}">Tab3</a>
+        </li>
+        <div x-show="tab==='tab1'"
+             style="padding: 15px; background-color: #fff;">
+          Tab1 Sapien proin mauris vulputate
+          consectetur ut hac faucibus risus pretium ad at. Quis at ut tristique non magna leo. ucibus risus
+          pretiumaucibusmagna leo. ucibus rietur ut hac faucibus risus pretium ad at. Quis at ut tristique non magna
+          leo. ucibus risussus pretium</div>
+        <div x-show="tab==='tab2'"
+             style="padding: 15px; background-color: #fff;"> Tab2 Sapien proin mauris vulputate
+          consectetur ut hac faucibus risus pretium ad at. Quis at ut tristique non magna leo. ucibus risus
+          pretiumaucibusmagna leo. ucibus rietur ut hac faucibus risus pretium ad at. Quis at ut tristique non magna
+          leo. ucibus risussus pretium</div>
+        <div x-show="tab==='tab3'"
+             style="padding: 15px; background-color: #fff;"> Tab3 Sapien proin mauris vulputate
+          consectetur ut hac faucibus risus pretium ad at. Quis at ut tristique non magna leo. ucibus risus
+          pretiumaucibusmagna leo. ucibus rietur ut hac faucibus risus pretium ad at. Quis at ut tristique non magna
+          leo. ucibus risussus pretium</div>
+      </div>
+    </section>
+
+    <section style="display: flex; flex-direction: column; justify-content: baseline; align-items: center;">
+      <!-- 4. Event -->
+      <h4 style="margin: 2.5em 0 .3em .1em;">Event</h4>
+      <!-- scroll event on self -->
+      <div x-data="{ isTop: true }"
+           @scroll.self="isTop = (self.OffsetY !== 0) && false"
+           style="background-color: rgb(30, 38, 50); width: 360px; height: 170px; overflow-y: scroll; position: relative; color: #eee">
+        <nav :class="{ 'scroll-bg-color' : isTop === false }"
+             style="position: sticky; top: 0; padding: .5em; text-align: center; color: rgb(30, 38, 50)"> <strong>Hi
+            there!</strong> </nav>
+        <section style="padding: 0 15px;">Sed maximus ullamcorper dis nostra natoque mus duis. Molestie dis nostra dui
+          netus
+          ultrices. Egestas ante
+          suscipit ultrices cras vestibulum vulputate dolor mollis.
+          Sed maximus ullamcorper dis nostra natoque mus duis. Molestie dis nostra dui netus ultrices. Egestas ante
+          suscipit
+          ultrices cras vestibulum vulputate dolor mollis.
+          Sed maximus ullamcorper dis nostra natoque mus duis. Molestie dis nostra dui netus ultrices. Egestas ante
+          suscipitultrices cras vestibulum vulputate dolor mollis.
+          Sed maximus ullamcorper dis nostra natoque mus duis. Molestie dis nostra dui netus ultrices. Egestas ante
+          suscipit netus
+          ultrices. Egestas ante
+          suscipit ultrices cras vestibulum vulputate dolor mollis.
+          Sed maximus ullamcorper dis nostra natoque mus duis. Molestie dis nostra dui netus ultrices. Egestas ante
+          suscipit
+          ultrices cras vestibulum vulputate dolor mollis.
+          Sed maximus ullamcorper dis nostra natoque mus duis. Molestie dis nostra dui netus ultrices. Egestas ante
+          suscipitultrices cras vestibulum vulputate dolor mollis.
+          Sed maximus ullamcorper dis nostra natoque mus duis. Molestie dis nostra dui netus ultrices. Egestas ante
+          suscipit
+          ultrices cras vestibulum vulputate dolor mollis.
+          Sed maximus ullamcorper dis nostra natoque mus duis. Molestie dis nostra dui netus ultrices. Egestas ante
+          ultrices cras vestibulum vulputate dolor mollis.
+          Sed maximus ullamcorper dis nostra natoque mus duis. Molestie dis nostra dui netus ultrices. Egestas ante
+          suscipit
+          ultrices cras vestibulum vulputate dolor mollis.</section>
+      </div>
+
+      <!-- 5. Loop -->
+      <h4 style="margin: 2.5em 0 .3em .1em;">Loop</h4>
+      <!-- array in state -->
+      <div x-data="{
+        faqs: [
+        {
+            question: 'Why do I need Alpine JS?',
+            answer: 'The syntax is simple and light.',
+            isOpen: false,
+        },
+        {
+            question: 'Why am I so awesome?',
+            answer: 'Because.',
+            isOpen: false,
+        },
+        {
+            question: 'Why learn on Scrimba?',
+            answer: 'Why not?',
+            isOpen: false,
+        },
+        ]
+      }"
+           style="width: 350px; border: 1px solid black; border-radius: 12px; padding:10px 15px">
+        <!-- use <template> x-for to loop through array content, can contain only one child -->
+        <!-- :key for each child   -->
+        <template x-for="faq in faqs"
+                  :key="faq.question">
+          <div style="margin-bottom: 1em;">
+            <div style="display: flex; align-items: center; justify-content: space-between; padding-right: 10px;">
+              <!-- x-text => textContent -->
+              <h3 x-text="faq.question"
+                  style="margin: 10px 0; padding: 0;"></h3>
+              <button x-show="!faq.isOpen"
+                      @click="faq.isOpen = true"
+                      style="font-size: 1.7em; background-color: transparent; border: none;"> + </button>
+              <button x-show="faq.isOpen"
+                      @click="faq.isOpen = false"
+                      style="font-size: 1.7em; background-color: transparent; border: none;"> - </button>
+            </div>
+            <p x-text="faq.answer"
+               x-show="faq.isOpen"
+               style="background-color: lightblue; padding: 10px;  border-radius: 6px; margin: 0;"></p>
+          </div>
+        </template>
+      </div>
+    </section>
+
+    <section style="display: flex; flex-direction: column; justify-content: space-between; align-items: center;">
+      <!-- 6. API -->
+      <h4 style="margin: 3.5em 0 .3em .1em;">API</h4>
+      <!-- x-init run when alpine initralized  -->
+      <div x-data="{quote: 'a'}"
+           x-init="
+        fetch('https://api.kanye.rest')
+          .then(res => res.json())
+          .then(data => quote = data.quote)
+      "
+           style="width: 350px; padding: 1em 1.5em; border-radius: 12px; background-color: lightblue;">
+        <strong x-text="`&quot; ${quote} &quot;`"></strong>
+      </div>
+
+      <!-- 7. C(U)RD -->
+      <h4 style="margin: 3.5em 0 .3em .1em;">C(U)RD</h4>
+      <div x-data="getTodos()"
+           style="width: 450px; height: 300px; background: lightblue; display: flex; justify-content: space-around; align-items: center; flex-direction: column; padding: .8em;">
+        <!-- x-model bind the value of an input element to Alpine data (state). -->
+        <input type="text"
+               x-model="todoTitle"
+               @keydown.enter="addTodo()"
+               placeholder="todo..."
+               style="padding: 10px; align-self: center; margin-bottom: 10px; border: none; box-shadow: 1px 1px 3px #bbb; outline: none;">
+        <div
+             style="width: 380px; height: 200px; background: #fff; border-radius: 4px; display: flex; flex-direction: column;  padding: 1em 0; overflow: scroll;">
+          <template x-for="todo in todos"
+                    :key="todo.id">
+            <section style="display: flex; align-items: center; justify-content: space-between; padding: 0 1em;">
+              <div style="display: flex; align-items: center; padding: 0 10px; ">
+                <input type="checkbox"
+                       x-model="todo.isComplete"
+                       style="margin-right: 10px;">
+                <!-- :class="{ 'class name' : when condition }" -->
+                <p x-text="todo.content"
+                   :class="{ 'line-trough' : todo.isComplete}"
+                   style="margin: .4em;"></p>
+              </div>
+              <button @click="removeTodo(todo.id)"
+                      style="background-color: transparent; border: none;">X</button>
+            </section>
+          </template>
+
+        </div>
+      </div>
+    </section>
+
+  </div>
+  <script>
+    function getTodos() {
+      return {
+        todos: [{
+          id: 1,
+          content: 'Finish Course!',
+          isComplete: false,
+        }],
+        todoTitle: '',
+        id: 2,
+        addTodo() {
+          if (this.todoTitle.trim() !== '') {
+            this.todos.push({
+              id: this.id,
+              content: this.todoTitle,
+              isComplete: false,
+            })
+            this.id++
+            this.todoTitle = ''
+          }
+        },
+        removeTodo(id) {
+          this.todos = this.todos.filter((todo) => todo.id !== id)
+        },
+      }
+    }
+  </script>
+
+</body>
+
+</html>
