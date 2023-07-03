@@ -7,6 +7,7 @@
 
 - [Alpine](https://alpinejs.dev/)
   - either use CDN or `npm install alpinejs`
+  - Alpine.js offers the reactive and declarative nature of big frameworks like Vue or React at a much lower cost. A lightweight, JavaScript framework.
 
 - I think I like it indeed. 
 
