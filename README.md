@@ -6,8 +6,9 @@
 ---
 
 - [Alpine](https://alpinejs.dev/)
-  - either use CDN or `npm install alpinejs`
+  - Either use CDN or `npm install alpinejs`
   - Alpine.js offers the reactive and declarative nature of big frameworks like Vue or React at a much lower cost. A lightweight, JavaScript framework.
+  - It will doing fine job with Tailwind.
 
 - I think I like it indeed. 
 
