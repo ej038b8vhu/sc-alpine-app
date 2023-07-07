@@ -9,6 +9,16 @@
   - Either use CDN or `npm install alpinejs`
   - Alpine.js offers the reactive and declarative nature of big frameworks like Vue or React at a much lower cost. A lightweight, JavaScript framework.
   - It will doing fine job with Tailwind.
+ 
+- CSS debugging
+  ```css
+    *:not(path):not(g) {
+	color:                    hsla(210, 100%, 100%, 0.9) !important;
+	background:               hsla(210, 100%,  50%, 0.5) !important;
+	outline:    solid 0.25rem hsla(210, 100%, 100%, 0.5) !important;
+	box-shadow: none !important;
+  }
+  ```  
 
 - I think I like it indeed. 
 
