@@ -12,6 +12,8 @@
   <link rel="icon"
         href="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Favatars1.githubusercontent.com%2Fu%2F59030169%3Fs%3D400%26v%3D4&f=1&nofb=1&ipt=93d1e14763861d8f560107e5f09d9ba891a6b53f2a0e56d79f71b98a0313575c&ipo=images"
         type="image/png" />
+  <link rel="stylesheet"
+        href="">
   <title>ALPINE</title>
 </head>
 <style>
@@ -49,7 +51,8 @@
 <body>
   <header style="position: relative; margin-bottom: 2.5em;">
     <img src="https://alpinejs.dev/alpine_long.svg"
-         alt="">
+         alt=""
+         onclick="addDebugCss()">
     <!-- 0. Transition -->
     <div x-data="{isOpen: false}"
          style="position: absolute; right: -4em; bottom: .5em;">
@@ -272,6 +275,16 @@
 
   </div>
   <script>
+
+    /* Add CSS debug */
+    function addDebugCss() {
+      const link = document.querySelector("[rel=stylesheet]")
+      const href = link.getAttribute('href')
+      if (href) link.setAttribute("href", "")
+      else link.setAttribute("href", "/debug.css")
+    }
+
+    /* Todo list function */
     function getTodos() {
       return {
         todos: [{
